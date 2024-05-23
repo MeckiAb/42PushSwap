@@ -12,11 +12,39 @@
 
 #include "push_swap.h"
 
-static int	chk_input(int argc, char **argv, t_ring **a_stack, t_ring **b_stack)
+static t_ring	*load_stack(t_ring *stack, int *arr, int len)
 {
-	int	i;
+	return (NULL);
+}
 
-	if argc
+static int	chk_dup(int *arr, int len)
+{
+	return (0);
+}
+
+t_ring	*chk_input(int argc, char **argv, t_ring *a_stack)
+{
+	int		i;
+	int		*temp;
+
+	if (argc < 2)
+		return (NULL);
+	temp = (int *)malloc(sizeof(int) * (argc - 1));
+	i = 1;
+	while (i < argc)
+	{
+		if (!ft_strncmp(argv[i], ft_itoa(ft_atoi(argv[i])), ft_strlen(argv[i]))
+			|| (ft_atoi(argv[i]) && argv[i][0] == '+'
+			&& !ft_strncmp(&argv[i][1], ft_itoa(ft_atoi(argv[i])),
+			ft_strlen(argv[i]) - 1)))
+			temp[i - 1] = ft_atoi(argv[i]);
+		else
+			return (free(temp), NULL);
+		i++;
+	}
+	if (chk_dup(temp, argc - 1))
+		a_stack = load_stack(a_stack, temp, argc - 1);
+	return (free(temp), a_stack);
 }
 
 int	main(int argc, char **argv)
@@ -25,9 +53,10 @@ int	main(int argc, char **argv)
 	t_ring	*a_stack;
 	t_ring	*b_stack;
 
-	lst_len = chk_input(argc, argv, &a_stack, &b_stack);
-	if (!lst_len)
-		return (clear_ring(a_stack), clear_ring(b_stack), 0);
-
-
+	a_stack = NULL;
+	b_stack = NULL;
+	a_stack = chk_input(argc, argv, &a_stack);
+	if (!a_stack)
+		return (ft_printf("Error.\n"), 0);
+	return (0);
 }

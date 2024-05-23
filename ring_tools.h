@@ -27,10 +27,10 @@ typedef struct s_item
 	int				steps;
 }	t_item;
 
-t_ring  *push(t_ring *rng, void *item);
-void	*pop(t_ring *rng, void (*del_item)(void *));
-t_ring  *rotate(t_ring *rng);
-t_ring  *r_rotate(t_ring *rng);
-void    clear_ring(t_ring *rng);
+t_ring	*push(t_ring *rng, void *item);
+void	*pop(t_ring *rng);
+t_ring	*rotate(t_ring *rng);
+t_ring	*r_rotate(t_ring *rng);
+void	clear_ring(t_ring *rng);
 
 #endif

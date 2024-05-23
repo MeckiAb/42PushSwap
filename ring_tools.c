@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ring_tools.h"
+#include "push_swap.h"
 
 t_ring	*push(t_ring *rng, void *item)
 {
@@ -35,7 +35,7 @@ t_ring	*push(t_ring *rng, void *item)
 	return (new);
 }
 
-void	*pop(t_ring **rng, void (*del_item)(void *))
+void	*pop(t_ring **rng)
 {
 	void	*item;
 	t_ring	*p;
@@ -46,7 +46,7 @@ void	*pop(t_ring **rng, void (*del_item)(void *))
 	item = p->item;
 	p->next->prev = p->prev;
 	p->prev->next = p->next;
-	(*del_item)(p->item);
+	del_item(p->item);
 	*rng = p->next;
 	free(p);
 	return (item);
