@@ -14,11 +14,30 @@
 
 static t_ring	*load_stack(t_ring *stack, int *arr, int len)
 {
-	return (NULL);
+	t_item	*aux;
+
+	aux = (t_item *)malloc(sizeof(t_item));
+	if (!aux)
+		return (stack = clear_ring(stack), stack);
+	while (len)
+		stack = push(stack, aux);
+	return (stack);
 }
 
 static int	chk_dup(int *arr, int len)
 {
+	int	i;
+
+	while (len)
+	{
+		i = 0;
+		while (i < len)
+		{
+			if (arr[i++] == arr[len])
+				return (1);
+		}
+		len--;
+	}
 	return (0);
 }
 
@@ -42,7 +61,7 @@ t_ring	*chk_input(int argc, char **argv, t_ring *a_stack)
 			return (free(temp), NULL);
 		i++;
 	}
-	if (chk_dup(temp, argc - 1))
+	if (!chk_dup(temp, argc - 1))
 		a_stack = load_stack(a_stack, temp, argc - 1);
 	return (free(temp), a_stack);
 }

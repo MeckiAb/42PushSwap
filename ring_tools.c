@@ -35,21 +35,22 @@ t_ring	*push(t_ring *rng, void *item)
 	return (new);
 }
 
-void	*pop(t_ring **rng)
+t_ring	*pop(t_ring *rng, void **item)
 {
-	void	*item;
-	t_ring	*p;
+	t_ring	*aux;
 
 	if (!rng)
 		return (NULL);
-	p = *rng;
-	item = p->item;
-	p->next->prev = p->prev;
-	p->prev->next = p->next;
-	del_item(p->item);
-	*rng = p->next;
-	free(p);
-	return (item);
+	aux = rng;	
+	if (rng->next != rng)
+	{
+		aux->next->prev = aux->prev;
+		aux->prev->next = aux->next;
+		rng = aux->next;
+	}
+	*item = aux->item;
+	free(aux);
+	return (rng);
 }
 
 t_ring	*rotate(t_ring *rng)
@@ -66,8 +67,13 @@ t_ring	*r_rotate(t_ring *rng)
 	return (rng->prev);
 }
 
-void	clear_ring(t_ring **rng)
+t_ring	*clear_ring(t_ring *rng)
 {
-	while (rng)
-		free(pop(rng));
+	t_item *item;
+
+	while (rng->next != rng)
+	{
+		rng = pop(rng, &item);
+		free(item);
+	}
 }
