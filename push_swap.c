@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:42:29 by labderra          #+#    #+#             */
-/*   Updated: 2024/05/28 18:20:18 by labderra         ###   ########.fr       */
+/*   Updated: 2024/05/29 13:27:58 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	del_item(void *item)
 {
-	free(item);	
+	free(item);
 }
 
 static t_list	*load_stack(t_list **stack, int *arr, int len)
@@ -65,10 +65,16 @@ static t_list	*chk_input(int argc, char **argv, t_list *a_stack)
 
 	if (argc < 2)
 		return (NULL);
-	temp = (int *)malloc(sizeof(int) * (argc - 1));
-	i = 1;
-	while (i < argc)
+	if (argc == 2)
 	{
+		argv = ft_split(ft_strjoin("x ", argv[1]), ' ');
+		argc = 1;
+		while (argv[argc])
+			argc++;
+	}
+	temp = (int *)malloc(sizeof(int) * (argc - 1));
+	i = 0;
+	while (++i < argc)
 		if (!ft_strncmp(argv[i], ft_itoa(ft_atoi(argv[i])), ft_strlen(argv[i]))
 			|| (ft_atoi(argv[i]) && argv[i][0] == '+'
 			&& !ft_strncmp(&argv[i][1], ft_itoa(ft_atoi(argv[i])),
@@ -76,16 +82,19 @@ static t_list	*chk_input(int argc, char **argv, t_list *a_stack)
 			temp[i - 1] = ft_atoi(argv[i]);
 		else
 			return (free(temp), NULL);
-		i++;
-	}
 	if (!chk_dup(temp, argc - 1))
 		a_stack = load_stack(&a_stack, temp, argc - 1);
 	return (free(temp), a_stack);
 }
 
+void	imprime(void *content)
+{
+	ft_printf("%i\n", ((t_item *)content)->content);
+}
+
+
 int	main(int argc, char **argv)
 {
-	//int		lst_len;
 	t_list	*a_stack;
 	t_list	*b_stack;
 
@@ -94,5 +103,7 @@ int	main(int argc, char **argv)
 	a_stack = chk_input(argc, argv, a_stack);
 	if (!a_stack)
 		return (ft_printf("Error.\n"), 0);
+ft_lstiter(a_stack, &imprime);
+	
 	return (0);
 }
