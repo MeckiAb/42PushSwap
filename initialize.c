@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:42:29 by labderra          #+#    #+#             */
-/*   Updated: 2024/05/30 15:04:27 by labderra         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:49:27 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ t_list	*chk_input(int argc, char **argv, t_list *a_stack)
 	int		i;
 	int		*temp;
 
-	if (argc < 2)
-		return (NULL);
 	if (argc == 2)
 	{
 		argv = ft_split(ft_strjoin("x ", argv[1]), ' ');
@@ -75,6 +73,7 @@ t_list	*chk_input(int argc, char **argv, t_list *a_stack)
 	temp = (int *)malloc(sizeof(int) * (argc - 1));
 	i = 0;
 	while (++i < argc)
+	{
 		if (!ft_strncmp(argv[i], ft_itoa(ft_atoi(argv[i])), ft_strlen(argv[i]))
 			|| (ft_atoi(argv[i]) && argv[i][0] == '+'
 			&& !ft_strncmp(&argv[i][1], ft_itoa(ft_atoi(argv[i])),
@@ -82,6 +81,7 @@ t_list	*chk_input(int argc, char **argv, t_list *a_stack)
 			temp[i - 1] = ft_atoi(argv[i]);
 		else
 			return (free(temp), NULL);
+	}
 	if (!chk_dup(temp, argc - 1))
 		a_stack = load_stack(&a_stack, temp, argc - 1);
 	return (free(temp), a_stack);

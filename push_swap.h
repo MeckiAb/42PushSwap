@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:39:39 by labderra          #+#    #+#             */
-/*   Updated: 2024/05/30 15:04:41 by labderra         ###   ########.fr       */
+/*   Updated: 2024/05/30 16:34:51 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 typedef struct s_item
 {
 	int	value;
-	int target;
+	int	target;
 	int	steps;
 }	t_item;
 
