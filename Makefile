@@ -6,14 +6,18 @@
 #    By: labderra <labderra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/15 09:26:13 by labderra          #+#    #+#              #
-#    Updated: 2024/05/28 18:33:15 by labderra         ###   ########.fr        #
+#    Updated: 2024/05/30 16:03:45 by labderra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 LIBFT = ../libft/libft.a
 FT_PRINTF = ../ft_printf/libftprintf.a
-SRC = push_swap.c \
+SRC = main.c \
+	push_swap.c \
+	moves_1.c \
+	moves_2.c \
+	moves_3.c \
 
 CC = clang -Wall -Wextra -Werror -g
 OBJ = $(SRC:.c=.o)

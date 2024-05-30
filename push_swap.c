@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:42:29 by labderra          #+#    #+#             */
-/*   Updated: 2024/05/29 13:27:58 by labderra         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:04:27 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_list	*load_stack(t_list **stack, int *arr, int len)
 			ft_lstclear(stack, &del_item);
 			return (NULL);
 		}
-		item->content = arr[len];
+		item->value = arr[len];
 		item->target = 0;
 		item->steps = 0;
 		new->content = item;
@@ -58,7 +58,7 @@ static int	chk_dup(int *arr, int len)
 	return (0);
 }
 
-static t_list	*chk_input(int argc, char **argv, t_list *a_stack)
+t_list	*chk_input(int argc, char **argv, t_list *a_stack)
 {
 	int		i;
 	int		*temp;
@@ -85,25 +85,4 @@ static t_list	*chk_input(int argc, char **argv, t_list *a_stack)
 	if (!chk_dup(temp, argc - 1))
 		a_stack = load_stack(&a_stack, temp, argc - 1);
 	return (free(temp), a_stack);
-}
-
-void	imprime(void *content)
-{
-	ft_printf("%i\n", ((t_item *)content)->content);
-}
-
-
-int	main(int argc, char **argv)
-{
-	t_list	*a_stack;
-	t_list	*b_stack;
-
-	a_stack = NULL;
-	b_stack = NULL;
-	a_stack = chk_input(argc, argv, a_stack);
-	if (!a_stack)
-		return (ft_printf("Error.\n"), 0);
-ft_lstiter(a_stack, &imprime);
-	
-	return (0);
 }
