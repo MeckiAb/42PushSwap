@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:39:39 by labderra          #+#    #+#             */
-/*   Updated: 2024/05/30 16:34:51 by labderra         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:37:54 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,8 @@ void	sa(t_list *a_stack);
 void	sb(t_list *b_stack);
 void	ss(t_list *a_stack, t_list *b_stack);
 t_list	*chk_input(int argc, char **argv, t_list *a_stack);
+void	get_target(t_list *i_stack, t_list *v_stack);
+void	sort(t_list **a_stack, t_list **b_stack);
+int		chk_rotate_sorted(t_list *stack);
 
 #endif
