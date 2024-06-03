@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sorting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 15:43:25 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/03 08:48:26 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/03 12:26:00 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,16 @@ static void	final_rotation(t_list **stack)
 
 void	sort(t_list **a_stack, t_list **b_stack)
 {
-	*b_stack = NULL;
+	get_target_asc(*a_stack, *a_stack);	
 	if (ft_lstsize(*a_stack) == 2)
 		sa(*a_stack);
 	else if (ft_lstsize(*a_stack) == 3)
 		sort_3_elem(a_stack);
+	else if (chk_rotate_sorted(*a_stack))
+		final_rotation(a_stack);
 	else
-	{	
-		get_prev_target(*a_stack, *a_stack);
-		if (chk_rotate_sorted(*a_stack))
-			final_rotation(a_stack);
-		//else	
-	}	
+		{
+			pb(a_stack, b_stack);
+		}
+	
 }

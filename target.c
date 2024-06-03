@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   target.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:50:31 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/02 13:32:15 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/03 11:01:23 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	get_minimum(t_list *i_stack)
 	return (temp);
 }
 
-static int	get_maximum(t_list *i_stack)
+int	get_maximum(t_list *i_stack)
 {
 	int	temp;
 
@@ -40,7 +40,7 @@ static int	get_maximum(t_list *i_stack)
 	return (temp);
 }
 
-void	get_prev_target(t_list *i_stack, t_list *v_stack)
+void	get_target_asc(t_list *i_stack, t_list *v_stack)
 {
 	t_list	*aux;
 	int		index;
@@ -64,7 +64,7 @@ void	get_prev_target(t_list *i_stack, t_list *v_stack)
 	}
 }
 
-void	get_next_target(t_list *i_stack, t_list *v_stack)
+void	get_target_desc(t_list *i_stack, t_list *v_stack)
 {
 	t_list	*aux;
 	int		index;

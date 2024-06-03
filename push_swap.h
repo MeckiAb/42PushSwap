@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:39:39 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/02 13:32:28 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/03 12:20:53 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 
 typedef struct s_item
 {
-	int	value;
-	int	target;
-	int	steps;
+	int		value;
+	int		target;
+	int		steps;
+	char	route;
 }	t_item;
 
 void	pa(t_list **a_stack, t_list **b_stack);
@@ -34,10 +35,13 @@ void	sa(t_list *a_stack);
 void	sb(t_list *b_stack);
 void	ss(t_list *a_stack, t_list *b_stack);
 t_list	*chk_input(int argc, char **argv, t_list *a_stack);
-void	get_prev_target(t_list *i_stack, t_list *v_stack);
-void	get_next_target(t_list *i_stack, t_list *v_stack);
+void	get_target_asc(t_list *i_stack, t_list *v_stack);
+void	get_target_desc(t_list *i_stack, t_list *v_stack);
 void	sort(t_list **a_stack, t_list **b_stack);
 int		get_minimum(t_list *i_stack);
+int		get_maximum(t_list *i_stack);
+void	route(int value, t_list *v_stack, int target, t_list *t_stack);
+
 
 
 #endif
