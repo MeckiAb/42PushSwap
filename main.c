@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:01:15 by labderra          #+#    #+#             */
-/*   Updated: 2024/05/31 15:44:59 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/02 14:00:25 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ static int	chk_sorted(t_list *stack)
 	}
 	return (1);
 }
-
-/* static void	print_stack(void *content)
+/* 
+static void	print_stack(void *content)
 {
 	ft_printf("%i\t%i\n", ((t_item *)content)->value,
 		((t_item *)content)->target);
-}
- */
+} */
+
 int	main(int argc, char **argv)
 {
 	t_list	*a_stack;
@@ -43,10 +43,13 @@ int	main(int argc, char **argv)
 	if (!a_stack)
 		return (ft_printf("Error.\n"), 0);
 	if (chk_sorted(a_stack))
+	{
+		ft_printf("sorted");
 		return (0);
+	}
 	sort(&a_stack, &b_stack);
 /* 	ft_printf("\nStack A :\nv\tt\n---------\n");
-	ft_lstiter(a_stack, &print_stack);*/
+	ft_lstiter(a_stack, &print_stack); */
  	return (0);
 }
 /* 

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   sorting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 15:43:25 by labderra          #+#    #+#             */
-/*   Updated: 2024/05/31 17:37:20 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/03 08:48:26 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	chk_rotate_sorted(t_list *stack)
+static int	chk_rotate_sorted(t_list *stack)
 {
 	t_list	*aux;
 
@@ -57,12 +57,42 @@ static void	sort_3_elem(t_list **a_stack)
 	}
 }
 
+static void	final_rotation(t_list **stack)
+{
+	int	min;
+	int	depth;
+	int	stack_size;
+	t_list	*aux;
+
+	min = get_minimum(*stack);
+	depth = 0;
+	aux = *stack;
+	while (aux && ((t_item *)(aux->content))->value != min)
+	{
+		aux = aux->next;
+		depth++;
+	}
+	stack_size = ft_lstsize(*stack);
+	if (depth <= stack_size / 2)
+		while(depth-- > 0)
+			ra(stack);
+	else
+		while (depth++ < stack_size)
+			rra(stack);
+}
+
 void	sort(t_list **a_stack, t_list **b_stack)
 {
+	*b_stack = NULL;
 	if (ft_lstsize(*a_stack) == 2)
 		sa(*a_stack);
 	else if (ft_lstsize(*a_stack) == 3)
 		sort_3_elem(a_stack);
 	else
-		pb(a_stack, b_stack);
+	{	
+		get_prev_target(*a_stack, *a_stack);
+		if (chk_rotate_sorted(*a_stack))
+			final_rotation(a_stack);
+		//else	
+	}	
 }
