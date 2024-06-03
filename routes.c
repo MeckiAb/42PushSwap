@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 11:08:53 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/03 12:20:06 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/04 00:10:20 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static int	north(int value, t_list *v_stack, int target, t_list *t_stack)
 {
 	int	depth_v;
-	int depth_t;
-	
+	int	depth_t;
+
 	depth_v = 0;
 	while (v_stack && ((t_item *)(v_stack->content))->value != value)
 	{
@@ -38,8 +38,8 @@ static int	north(int value, t_list *v_stack, int target, t_list *t_stack)
 static int	south(int value, t_list *v_stack, int target, t_list *t_stack)
 {
 	int	depth_v;
-	int depth_t;
-	
+	int	depth_t;
+
 	depth_v = ft_lstsize(v_stack);
 	while (v_stack && ((t_item *)(v_stack->content))->value != value)
 	{
@@ -61,8 +61,8 @@ static int	south(int value, t_list *v_stack, int target, t_list *t_stack)
 static int	east(int value, t_list *v_stack, int target, t_list *t_stack)
 {
 	int	depth_v;
-	int depth_t;
-	
+	int	depth_t;
+
 	depth_v = 0;
 	while (v_stack && ((t_item *)(v_stack->content))->value != value)
 	{
@@ -81,8 +81,8 @@ static int	east(int value, t_list *v_stack, int target, t_list *t_stack)
 static int	west(int value, t_list *v_stack, int target, t_list *t_stack)
 {
 	int	depth_v;
-	int depth_t;
-	
+	int	depth_t;
+
 	depth_v = ft_lstsize(v_stack);
 	while (v_stack && ((t_item *)(v_stack->content))->value != value)
 	{
@@ -121,7 +121,8 @@ void	route(int value, t_list *v_stack, int target, t_list *t_stack)
 		route = 'w';
 	}
 	while (v_stack && ((t_item *)(v_stack->content))->value != value)
-	v_stack = v_stack->next;
+		v_stack = v_stack->next;
 	((t_item *)(v_stack->content))->steps = steps;
 	((t_item *)(v_stack->content))->route = route;
+ft_printf("route\nValue %i\ntarget %i\nsteps %i\nroute %c\n",((t_item *)(v_stack->content))->value,((t_item *)(v_stack->content))->target, steps, route);
 }

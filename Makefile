@@ -6,7 +6,7 @@
 #    By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/15 09:26:13 by labderra          #+#    #+#              #
-#    Updated: 2024/06/03 08:49:10 by labderra         ###   ########.fr        #
+#    Updated: 2024/06/03 23:13:06 by labderra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,9 @@ SRC = main.c \
 	moves_3.c \
 	sorting.c \
 	target.c \
+	routes.c \
+	checks.c \
 	
-
 CC = clang -Wall -Wextra -Werror -g
 OBJ = $(SRC:.c=.o)
 

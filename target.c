@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   target.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:50:31 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/03 11:01:23 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:02:45 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	get_target_asc(t_list *i_stack, t_list *v_stack)
 		if (temp == 2147483647)
 			temp = get_minimum(i_stack);
 		((t_item *)(v_stack->content))->target = temp;
+		route(((t_item *)(v_stack->content))->value, v_stack, temp, i_stack);
 		v_stack = v_stack->next;
 	}
 }
@@ -84,6 +85,21 @@ void	get_target_desc(t_list *i_stack, t_list *v_stack)
 		if (temp == -2147483648)
 			temp = get_maximum(i_stack);
 		((t_item *)(v_stack->content))->target = temp;
+		route(((t_item *)(v_stack->content))->value, v_stack, temp, i_stack);
 		v_stack = v_stack->next;
 	}
+}
+
+t_item	*get_next_item(t_list *stack)
+{
+	t_item	*aux;
+
+	aux = (t_item *)(stack->content);
+	while (stack)
+	{
+		if (((t_item *)(stack->content))->steps < aux->steps)
+			aux = (t_item *)(stack->content);
+		stack = stack->next;
+	}
+	return (aux);	
 }
