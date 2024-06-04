@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 11:08:53 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/04 00:10:20 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/04 13:03:48 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	north(int value, t_list *v_stack, int target, t_list *t_stack)
 		depth_v++;
 	}
 	depth_t = 0;
-	while (t_stack && ((t_item *)(t_stack->content))->target != target)
+	while (t_stack && ((t_item *)(t_stack->content))->value != target)
 	{
 		t_stack = t_stack->next;
 		depth_t++;
@@ -47,7 +47,7 @@ static int	south(int value, t_list *v_stack, int target, t_list *t_stack)
 		depth_v--;
 	}
 	depth_t = ft_lstsize(t_stack);
-	while (t_stack && ((t_item *)(t_stack->content))->target != target)
+	while (t_stack && ((t_item *)(t_stack->content))->value != target)
 	{
 		t_stack = t_stack->next;
 		depth_t--;
@@ -70,7 +70,7 @@ static int	east(int value, t_list *v_stack, int target, t_list *t_stack)
 		depth_v++;
 	}
 	depth_t = ft_lstsize(t_stack);
-	while (t_stack && ((t_item *)(t_stack->content))->target != target)
+	while (t_stack && ((t_item *)(t_stack->content))->value != target)
 	{
 		t_stack = t_stack->next;
 		depth_t--;
@@ -90,7 +90,7 @@ static int	west(int value, t_list *v_stack, int target, t_list *t_stack)
 		depth_v--;
 	}
 	depth_t = 0;
-	while (t_stack && ((t_item *)(t_stack->content))->target != target)
+	while (t_stack && ((t_item *)(t_stack->content))->value != target)
 	{
 		t_stack = t_stack->next;
 		depth_t++;

@@ -6,14 +6,14 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:42:29 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/03 11:48:14 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/04 11:35:04 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdlib.h>
 
-static void	del_item(void *item)
+void	del_item(void *item)
 {
 	free(item);
 }
@@ -38,6 +38,7 @@ static t_list	*load_stack(t_list **stack, int *arr, int len)
 		item->route = '0';
 		new->content = item;
 		ft_lstadd_front(stack, new);
+
 	}
 	return (*stack);
 }
@@ -46,12 +47,12 @@ static int	chk_dup(int *arr, int len)
 {
 	int	i;
 
-	while (len)
+	while (len > 1)
 	{
 		i = 0;
-		while (i < len)
+		while (i < len - 1)
 		{
-			if (arr[i++] == arr[len])
+			if (arr[i++] == arr[len - 1])
 				return (1);
 		}
 		len--;

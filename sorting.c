@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sorting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 15:43:25 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/04 00:12:19 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/04 13:13:35 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,15 +125,15 @@ void	move_item_ba(t_item *item, t_list **a_stack, t_list **b_stack)
 			rrr(b_stack, a_stack);
 	if (item->route == 'n' || item->route == 'e')		
 		while (((t_item *)((*b_stack)->content))->value != item->value)
-			ra(b_stack);
+			rb(b_stack);
 	else
 		while (((t_item *)((*b_stack)->content))->value != item->value)
-			rra(b_stack);
+			rrb(b_stack);
 	if (item->route == 'n' || item->route == 'w')	
 		while (((t_item *)((*a_stack)->content))->target != item->target)
-			rb(a_stack);
+			ra(a_stack);
 	else
 		while (((t_item *)((*a_stack)->content))->target != item->target)
-			rrb(a_stack);
+			rra(a_stack);
 	pa(b_stack, a_stack);		
 }
