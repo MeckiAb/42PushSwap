@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 11:08:53 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/04 13:03:48 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/04 19:07:38 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,4 @@ void	route(int value, t_list *v_stack, int target, t_list *t_stack)
 		v_stack = v_stack->next;
 	((t_item *)(v_stack->content))->steps = steps;
 	((t_item *)(v_stack->content))->route = route;
-ft_printf("route\nValue %i\ntarget %i\nsteps %i\nroute %c\n",((t_item *)(v_stack->content))->value,((t_item *)(v_stack->content))->target, steps, route);
 }

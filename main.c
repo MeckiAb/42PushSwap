@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:01:15 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/04 11:35:39 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/04 19:15:10 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,3 @@ int	main(int argc, char **argv)
 	ft_lstclear(&a_stack, &del_item);
  	return (0);
 }
-
-
-/*	ERROR WITH 0 ENTRY
-		- fails as argument or var, prompts error. 
-		- posible issue with itoa
-		- PROBLEM FIXED IN chk_dup
-
-	ROUTE ERROR
-		- route should be north, east instead.
-		- stuck in first move rrb
-	*/

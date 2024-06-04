@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+         #
+#    By: labderra <labderra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/15 09:26:13 by labderra          #+#    #+#              #
-#    Updated: 2024/06/03 23:13:06 by labderra         ###   ########.fr        #
+#    Updated: 2024/06/04 19:16:47 by labderra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
