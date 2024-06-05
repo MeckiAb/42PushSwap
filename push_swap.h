@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:39:39 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/04 18:43:03 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/05 11:07:53 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	route(int value, t_list *v_stack, int target, t_list *t_stack);
 int		chk_rotate_sorted_asc(t_list *stack);
 int		chk_rotate_sorted_desc(t_list *stack);
 int		chk_sorted(t_list *stack);
-t_item	*get_next_item(t_list *stack);
+t_item	*next_item(t_list *stack);
 void	move_item_ab(t_item *item, t_list **a_stack, t_list **b_stack);
 void	move_item_ba(t_item *item, t_list **a_stack, t_list **b_stack);
 void	print_stack(t_list *stack);

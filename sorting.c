@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 15:43:25 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/04 20:21:59 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/05 14:05:15 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,15 @@ void	move_item_ba(t_item *item, t_list **a_stack, t_list **b_stack)
 			rra(a_stack);
 	pa(a_stack, b_stack);		
 }
-
+/* 
 void	sort(t_list **a_stack, t_list **b_stack)
 {
-	if (ft_lstsize(*a_stack) == 2)
+	int	stack_len;
+
+	stack_len = ft_lstsize(*a_stack);
+	if (stack_len == 2)
 		sa(*a_stack);
-	else if (ft_lstsize(*a_stack) == 3)
+	else if (stack_len == 3)
 	{
 		sort_3_elem(a_stack);
 		final_rotation(a_stack);
@@ -128,7 +131,85 @@ void	sort(t_list **a_stack, t_list **b_stack)
 		{
 			get_target_asc(*a_stack, *b_stack);
 			move_item_ba(get_next_item(*b_stack), a_stack, b_stack);
-			final_rotation(a_stack);
 		}
+		final_rotation(a_stack);
+	}
+}
+ */
+
+void	sort(t_list **a_stack, t_list **b_stack)
+{
+	int	stack_len;
+	int median;
+
+	stack_len = ft_lstsize(*a_stack);
+	if (stack_len == 2)
+		sa(*a_stack);
+	else if (stack_len == 3)
+	{
+		sort_3_elem(a_stack);
+		final_rotation(a_stack);
+	}
+	else if (chk_rotate_sorted_asc(*a_stack))
+		final_rotation(a_stack);
+	else
+	{
+		while (ft_lstsize(*a_stack) > 3 && !chk_rotate_sorted_asc(*a_stack))
+		{
+			median = (get_maximum(*a_stack) - get_minimum(*a_stack)) / 5;
+			while (ft_lstsize(*b_stack) < stack_len / 5)
+				if (((t_item *)((*a_stack)->content))->value < median)
+					pb(a_stack,b_stack);
+				else
+					ra(a_stack);
+			median = 2 * (get_maximum(*a_stack) - get_minimum(*a_stack)) / 5;
+			while (ft_lstsize(*b_stack) < 2 * stack_len / 5)
+				if (((t_item *)((*a_stack)->content))->value < median)
+				{
+					pb(a_stack,b_stack);
+					rb(b_stack);
+				}
+				else
+					ra(a_stack);
+			median = 3 * (get_maximum(*a_stack) - get_minimum(*a_stack)) / 5;
+			while (ft_lstsize(*b_stack) < 3 * stack_len / 5)
+				if (((t_item *)((*a_stack)->content))->value < median)
+					pb(a_stack,b_stack);
+				else
+					ra(a_stack);
+			median = 4 * (get_maximum(*a_stack) - get_minimum(*a_stack)) / 5;
+			while (ft_lstsize(*b_stack) < 4 * stack_len / 5)
+				if (((t_item *)((*a_stack)->content))->value < median)
+				{
+					pb(a_stack,b_stack);
+					rb(b_stack);
+				}
+				else
+					ra(a_stack);
+			median = 5 * (get_maximum(*a_stack) - get_minimum(*a_stack)) / 5;
+			while (ft_lstsize(*a_stack) > 2)
+				if (((t_item *)((*a_stack)->content))->value < median)
+				{
+					pb(a_stack,b_stack);
+					rb(b_stack);
+				}
+				else
+					ra(a_stack);
+		}
+		/* while (*b_stack && *a_stack && !chk_rotate_sorted_asc(*a_stack) && !chk_rotate_sorted_desc(*b_stack))
+		{
+			get_target_desc(*b_stack, *a_stack);
+			get_target_asc(*a_stack, *b_stack);
+			if (next_item(*a_stack)->steps <= next_item(*b_stack)->steps)
+				move_item_ab(next_item(*a_stack), a_stack, b_stack);
+			else
+				move_item_ba(next_item(*b_stack), a_stack, b_stack);
+		} */
+		while (*b_stack)
+		{
+			get_target_asc(*a_stack, *b_stack);
+			move_item_ba(next_item(*b_stack), a_stack, b_stack);
+		}
+		final_rotation(a_stack);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   target.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:50:31 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/03 19:02:45 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/05 11:20:32 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	get_target_desc(t_list *i_stack, t_list *v_stack)
 	}
 }
 
-t_item	*get_next_item(t_list *stack)
+t_item	*next_item(t_list *stack)
 {
 	t_item	*aux;
 
@@ -103,3 +103,17 @@ t_item	*get_next_item(t_list *stack)
 	}
 	return (aux);	
 }
+/* t_item	*next_item(t_list *stack)
+{
+	t_item	*aux;
+
+	aux = (t_item *)(stack->content);
+	while (stack)
+	{
+		if (((t_item *)(stack->content))->steps < aux->steps)
+			return ((t_item *)(stack->content));
+		else 
+			stack = stack->next;
+	}
+	return (aux);	
+} */
