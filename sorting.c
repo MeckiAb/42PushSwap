@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 15:43:25 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/05 14:05:15 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/05 20:45:46 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	sort_3_elem(t_list **a_stack)
 		sa(*a_stack);
 }
 
-static void	final_rotation(t_list **stack)
+/* static void	final_rotation(t_list **stack)
 {
 	int		min;
 	int		depth;
@@ -50,6 +50,26 @@ static void	final_rotation(t_list **stack)
 			ra(stack);
 	else
 		while (depth++ < stack_size)
+			rra(stack);
+} */
+
+static void	final_rotation(t_list **stack)
+{
+	int		depth;
+	t_list	*aux;
+
+	depth = 0;
+	aux = *stack;
+	while (aux && ((t_item *)(aux->content))->target != 0)
+	{
+		aux = aux->next;
+		depth++;
+	}
+	if (depth <= ft_lstsize(*stack) / 2)
+		while (((t_item *)((*stack)->content))->target != 0)
+			ra(stack);
+	else
+		while (((t_item *)((*stack)->content))->target != 0)
 			rra(stack);
 }
 

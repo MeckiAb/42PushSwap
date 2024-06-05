@@ -6,7 +6,7 @@
 #    By: labderra <labderra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/15 09:26:13 by labderra          #+#    #+#              #
-#    Updated: 2024/06/04 19:16:47 by labderra         ###   ########.fr        #
+#    Updated: 2024/06/05 20:18:54 by labderra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,5 +48,8 @@ fclean : clean
 	rm -f $(NAME)
 
 re : fclean all
+
+test : all clean
+	./push_swap_visualizer/build/bin/visualizer
 
 .PHONY : all clean fclean re
