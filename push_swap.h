@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:39:39 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/05 11:07:53 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/06 12:33:12 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ t_item	*next_item(t_list *stack);
 void	move_item_ab(t_item *item, t_list **a_stack, t_list **b_stack);
 void	move_item_ba(t_item *item, t_list **a_stack, t_list **b_stack);
 void	print_stack(t_list *stack);
+int		chk_rotate_sorted(t_list *a_stack);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:42:29 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/05 20:37:34 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:37:41 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	init_target_pos(int *arr, int *ordered, int len)
 		i++;
 	}
 }
-static int	get_target_pos(int *ordered, int value, int len)
+static int	set_target_pos(int *ordered, int value, int len)
 {
 	while (len--)
 		if (ordered[len] == value)
@@ -58,9 +58,11 @@ static t_list	*load_stack(t_list **stack, int *arr, int len)
 	t_list	*new;
 	t_item	*item;
 	int		ordered[len];
-	
+	int		size;
+
+	size = len;
 	init_target_pos(arr, ordered, len);	
-	while (len-- > 0)
+	while (len--)
 	{
 		item = (t_item *)malloc(sizeof(t_item));
 		new = (t_list *)malloc(sizeof(t_list));
@@ -70,7 +72,7 @@ static t_list	*load_stack(t_list **stack, int *arr, int len)
 			return (NULL);
 		}
 		item->value = arr[len];
-		item->target = get_target_pos(ordered, item->value, len);
+		item->target = set_target_pos(ordered, item->value, size);
 		item->steps = 0;
 		item->route = '0';
 		new->content = item;
