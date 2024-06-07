@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 18:12:09 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/06 12:29:38 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/07 11:43:13 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	chk_rotate_sorted(t_list *a_stack)
 	}
 	return (1);
 }
-
+/* 
 int	chk_rotate_sorted_asc(t_list *stack)
 {
 	t_list	*aux;
@@ -66,7 +66,7 @@ int	chk_rotate_sorted_desc(t_list *stack)
 		return (0);
 	return (1);
 }
-
+ */
 int	chk_sorted(t_list *stack)
 {
 	while (stack && stack->next)

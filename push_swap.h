@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:39:39 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/06 12:33:12 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/07 11:32:10 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ typedef struct s_item
 {
 	int		value;
 	int		target;
-	int		steps;
-	char	route;
+	int		cost;
 }	t_item;
 
 void	pa(t_list **a_stack, t_list **b_stack);

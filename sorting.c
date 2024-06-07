@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sorting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 15:43:25 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/07 09:21:20 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/07 12:39:55 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,19 +84,67 @@ void	push_max_item(t_list **a_stack, t_list **b_stack, int target)
 	pa(a_stack, b_stack);
 }
 
+int		target_depth(t_list *a_stack, int target)
+{
+	int		depth;
+
+	depth = 1;
+	while (a_stack && a_stack->next)
+	{
+		if (((t_item *)(a_stack->content))->target < target 
+			&& ((t_item *)(a_stack->next->content))->target > target)
+			return (depth);
+		depth++;
+		a_stack = a_stack->next;
+	}
+	return (0);
+}
+
+void	push_in_place(t_list **a_stack, t_list **b_stack, int target)
+{
+	t_list	*aux;
+	int		cost;
+	int		depth;
+
+	aux = *b_stack;
+	depth = 0;
+	while (aux)
+	{
+		cost = target_depth(*a_stack, ((t_item *)(aux->content))->target) + depth;
+		if (depth <= ft_lstsize(*b_stack) && cost <= ft_lstsize(*b_stack))
+			((t_item *)(aux->content))->target = 0;
+		else if (depth > ft_lstsize(*b_stack) && cost > ft_lstsize(*b_stack))
+			((t_item *)(aux->content))->target = 0;
+		else if (depth > ft_lstsize(*b_stack) && cost > ft_lstsize(*b_stack))
+			((t_item *)(aux->content))->target = 0;
+		else (depth <= ft_lstsize(*b_stack) && cost <= ft_lstsize(*b_stack))
+			((t_item *)(aux->content))->target = 0;
+
+
+		depth++;
+		aux = aux->next;
+}
+
 void	push_median_item(t_list **a_stack, t_list **b_stack, int median)
 {
 	t_list	*aux;
 	int		depth;
+	int		first;
+	int		last;
 
 	aux = *a_stack;
 	depth = 0;
-	while (((t_item *)(aux->content))->target >= median)
+	first = -1;
+	while (aux)
 	{
+		if (((t_item *)(aux->content))->target < median)
+			last = depth;
+		if (((t_item *)(aux->content))->target < median && first == -1)
+			first = depth;
 		aux = aux->next;
 		depth++;
 	}
-	if (depth <= ft_lstsize(*a_stack) / 2)
+	if (first <= depth - last)
 		while (((t_item *)((*a_stack)->content))->target >= median)
 			ra(a_stack);
 	else
@@ -117,13 +165,13 @@ void	sort(t_list **a_stack, t_list **b_stack)
 	else if (stack_len > 3)
 	{
 		phase = 0;
-		while (phase++ < 10)
+		while (phase++ < 6)
 		{
-			median = phase * stack_len / 10;
+			median = phase * stack_len / 6;
 			while (ft_lstsize(*b_stack) < median)// && ft_lstsize(*a_stack) > 3)
 			{
 				push_median_item(a_stack, b_stack, median);
-				if (phase % 2)
+				if (ft_lstsize(*b_stack) % 2)
 					rb(b_stack);
 			}
 		}

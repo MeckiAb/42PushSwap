@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:50:31 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/06 10:42:45 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/07 11:42:41 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	get_maximum(t_list *i_stack)
 	}
 	return (temp);
 }
-
+/* 
 void	get_target_asc(t_list *i_stack, t_list *v_stack)
 {
 	t_list	*aux;
@@ -89,8 +89,8 @@ void	get_target_desc(t_list *i_stack, t_list *v_stack)
 		v_stack = v_stack->next;
 	}
 }
-
-t_item	*next_item(t_list *stack)
+ */
+/*t_item	*next_item(t_list *stack)
 {
 	t_item	*aux;
 
@@ -103,7 +103,7 @@ t_item	*next_item(t_list *stack)
 	}
 	return (aux);	
 }
-/* t_item	*next_item(t_list *stack)
+ t_item	*next_item(t_list *stack)
 {
 	t_item	*aux;
 

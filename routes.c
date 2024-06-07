@@ -6,12 +6,12 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 11:08:53 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/04 19:07:38 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/07 11:38:57 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+/* 
 static int	north(int value, t_list *v_stack, int target, t_list *t_stack)
 {
 	int	depth_v;
@@ -125,3 +125,4 @@ void	route(int value, t_list *v_stack, int target, t_list *t_stack)
 	((t_item *)(v_stack->content))->steps = steps;
 	((t_item *)(v_stack->content))->route = route;
 }
+ */

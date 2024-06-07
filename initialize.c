@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:42:29 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/06 13:37:41 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/07 11:32:34 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ static t_list	*load_stack(t_list **stack, int *arr, int len)
 		}
 		item->value = arr[len];
 		item->target = set_target_pos(ordered, item->value, size);
-		item->steps = 0;
-		item->route = '0';
+		item->cost = 0;
 		new->content = item;
 		ft_lstadd_front(stack, new);
 	}
