@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 15:43:25 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/06 19:01:03 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/07 09:21:20 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,15 @@ int	item_depth(t_list *stack, int target)
 
 void	push_max_item(t_list **a_stack, t_list **b_stack, int target)
 {
-	int depth;
+	int 	depth;
+	t_list	*aux;
 
 	depth = 0;
-	while (((t_item *)((*b_stack)->content))->target != target)
+	aux = *b_stack;
+	while (((t_item *)(aux->content))->target != target)
 	{
 		depth++;
-		*b_stack = (*b_stack)->next;
+		aux = aux->next;
 	}
 	if (depth <= target / 2)
 		while (((t_item *)((*b_stack)->content))->target != target)
@@ -118,7 +120,7 @@ void	sort(t_list **a_stack, t_list **b_stack)
 		while (phase++ < 10)
 		{
 			median = phase * stack_len / 10;
-			while (ft_lstsize(*b_stack) < median && ft_lstsize(*a_stack) > 3)
+			while (ft_lstsize(*b_stack) < median)// && ft_lstsize(*a_stack) > 3)
 			{
 				push_median_item(a_stack, b_stack, median);
 				if (phase % 2)
