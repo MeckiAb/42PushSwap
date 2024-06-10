@@ -6,12 +6,11 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:42:29 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/10 10:40:20 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:24:06 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdlib.h>
 
 static void	init_target_pos(int *arr, int *ordered, int len)
 {
@@ -40,6 +39,7 @@ static void	init_target_pos(int *arr, int *ordered, int len)
 		i++;
 	}
 }
+
 static int	set_target_pos(int *ordered, int value, int len)
 {
 	while (len--)
@@ -48,90 +48,29 @@ static int	set_target_pos(int *ordered, int value, int len)
 	return (-1);
 }
 
-static t_list	*load_stack(t_list **stack, int *arr, int len)
+t_list	*load_stack(t_list **stack, int *arr, int len)
 {
 	t_list	*new;
 	t_item	*item;
-	int		ordered[len];
+	int		*ordered;
 	int		size;
 
+	ordered = (int *)malloc(sizeof(int) * len);
+	if (!ordered)
+		return (NULL);
 	size = len;
-	init_target_pos(arr, ordered, len);	
+	init_target_pos(arr, ordered, len);
 	while (len--)
 	{
 		item = (t_item *)malloc(sizeof(t_item));
 		new = (t_list *)malloc(sizeof(t_list));
 		if (!item || !new)
-		{
-			ft_lstclear(stack, &free);
-			return (NULL);
-		}
+			return (ft_lstclear(stack, &free), NULL);
 		item->value = arr[len];
 		item->target = set_target_pos(ordered, item->value, size);
 		item->cost = 0;
 		new->content = item;
 		ft_lstadd_front(stack, new);
 	}
-	return (*stack);
-}
-
-static int	chk_dup(int *arr, int len)
-{
-	int	i;
-
-	while (len > 1)
-	{
-		i = 0;
-		while (i < len - 1)
-		{
-			if (arr[i++] == arr[len - 1])
-				return (1);
-		}
-		len--;
-	}
-	return (0);
-}
-
-t_list	*chk_split_input(char *arg, t_list *a_stack)
-{
-	int		argc;
-	char	**argv;
-	char	*str;
-
-	str = ft_strjoin("x ", arg);
-	argv = ft_split(str, ' ');
-	free(str);
-	argc = 1;
-	while (argv[argc])
-		argc++;
-	a_stack = chk_input(argc, argv, a_stack);
-	while (argc--)
-		free(argv[argc]);
-	free (argv);
-	return (a_stack);	
-}
-
-t_list	*chk_input(int argc, char **argv, t_list *a_stack)
-{
-	int		i;
-	int		*temp;
-	char	*chk;
-
-	temp = (int *)malloc(sizeof(int) * (argc - 1));
-	i = 0;
-	while (++i < argc)
-	{
-		chk = ft_itoa(ft_atoi(argv[i]));
-		if (!ft_strncmp(argv[i], chk, ft_strlen(argv[i])) || (ft_atoi(argv[i])
-			&& argv[i][0] == '+' && !ft_strncmp(&argv[i][1], chk,
-			ft_strlen(argv[i]) - 1)))
-			temp[i - 1] = ft_atoi(argv[i]);
-		else
-			return (free(temp), free(chk), NULL);
-		free(chk);
-//		chk = NULL;
-	}
-	if (!chk_dup(temp, argc - 1))
-		a_stack = load_stack(&a_stack, temp, argc - 1);
-	return (free(temp), a_stack);
+	return (free(ordered), *stack);
 }

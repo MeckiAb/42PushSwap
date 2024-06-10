@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:39:39 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/10 12:46:50 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:27:13 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 # include "../libft/libft.h"
 # include "../ft_printf/ft_printf.h"
+# include <stdlib.h>
 
 typedef struct s_item
 {
@@ -35,9 +36,12 @@ void	sb(t_list *b_stack);
 void	ss(t_list *a_stack, t_list *b_stack);
 t_list	*chk_input(int argc, char **argv, t_list *a_stack);
 t_list	*chk_split_input(char *arg, t_list *a_stack);
-void	sort(t_list **a_stack, t_list **b_stack);
 int		chk_sorted(t_list *stack);
-int		chk_rotate_sorted(t_list *a_stack);
-
+t_list	*load_stack(t_list **stack, int *arr, int len);
+int		item_depth(t_list *stack, int target);
+int		target_depth(t_list *a_stack, int target);
+int		item_cost(t_list *a_stack, t_list *b_stack, int a_pos, int b_pos);
+int		get_cheapest_item(t_list *a_stack, t_list *b_stack);
+void	sort(t_list **a_stack, t_list **b_stack);
 
 #endif

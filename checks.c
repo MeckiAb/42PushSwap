@@ -6,67 +6,29 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 18:12:09 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/07 11:43:13 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/10 13:17:48 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	chk_rotate_sorted(t_list *a_stack)
+static int	chk_dup(int *arr, int len)
 {
-	int	max;
+	int	i;
 
-	max = ft_lstsize(a_stack) - 1;
-	while (a_stack && a_stack->next)
+	while (len > 1)
 	{
-		if (((t_item *)(a_stack->content))->target + 1 !=
-		((t_item *)(a_stack->next->content))->target
-		|| (((t_item *)(a_stack->content))->target == max
-		&& ((t_item *)(a_stack->next->content))->target != 0))
-			return (0);
-		a_stack = a_stack->next;
+		i = 0;
+		while (i < len - 1)
+		{
+			if (arr[i++] == arr[len - 1])
+				return (1);
+		}
+		len--;
 	}
-	return (1);
-}
-/* 
-int	chk_rotate_sorted_asc(t_list *stack)
-{
-	t_list	*aux;
-
-	aux = stack;
-	get_target_asc(stack, stack);
-	while (stack && stack->next)
-	{
-		if (((t_item *)(stack->content))->target !=
-			((t_item *)(stack->next->content))->value)
-			return (0);
-		stack = stack->next;
-	}
-	if (((t_item *)(stack->content))->target !=
-	((t_item *)(aux->content))->value)
-		return (0);
-	return (1);
+	return (0);
 }
 
-int	chk_rotate_sorted_desc(t_list *stack)
-{
-	t_list	*aux;
-
-	aux = stack;
-	get_target_desc(stack, stack);
-	while (stack && stack->next)
-	{
-		if (((t_item *)(stack->content))->value !=
-			((t_item *)(stack->next->content))->target)
-			return (0);
-		stack = stack->next;
-	}
-	if (((t_item *)(stack->content))->value !=
-	((t_item *)(aux->content))->target)
-		return (0);
-	return (1);
-}
- */
 int	chk_sorted(t_list *stack)
 {
 	while (stack && stack->next)
@@ -77,4 +39,47 @@ int	chk_sorted(t_list *stack)
 		stack = stack->next;
 	}
 	return (1);
+}
+
+t_list	*chk_split_input(char *arg, t_list *a_stack)
+{
+	int		argc;
+	char	**argv;
+	char	*str;
+
+	str = ft_strjoin("x ", arg);
+	argv = ft_split(str, ' ');
+	free(str);
+	argc = 1;
+	while (argv[argc])
+		argc++;
+	a_stack = chk_input(argc, argv, a_stack);
+	while (argc--)
+		free(argv[argc]);
+	free (argv);
+	return (a_stack);
+}
+
+t_list	*chk_input(int argc, char **argv, t_list *a_stack)
+{
+	int		i;
+	int		*temp;
+	char	*chk;
+
+	temp = (int *)malloc(sizeof(int) * (argc - 1));
+	i = 0;
+	while (++i < argc)
+	{
+		chk = ft_itoa(ft_atoi(argv[i]));
+		if (!ft_strncmp(argv[i], chk, ft_strlen(argv[i])) || (ft_atoi(argv[i])
+				&& argv[i][0] == '+' && !ft_strncmp(&argv[i][1], chk,
+			ft_strlen(argv[i]) - 1)))
+			temp[i - 1] = ft_atoi(argv[i]);
+		else
+			return (free(temp), free(chk), NULL);
+		free(chk);
+	}
+	if (!chk_dup(temp, argc - 1))
+		a_stack = load_stack(&a_stack, temp, argc - 1);
+	return (free(temp), a_stack);
 }
