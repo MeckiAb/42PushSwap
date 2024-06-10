@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:42:29 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/09 20:56:06 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:40:20 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,33 +94,21 @@ static int	chk_dup(int *arr, int len)
 
 t_list	*chk_split_input(char *arg, t_list *a_stack)
 {
-	int		i;
-	int		*temp;
-	char	*chk;
 	int		argc;
 	char	**argv;
+	char	*str;
 
-	argv = ft_split(ft_strjoin("x ", arg), ' ');
+	str = ft_strjoin("x ", arg);
+	argv = ft_split(str, ' ');
+	free(str);
 	argc = 1;
 	while (argv[argc])
 		argc++;
-	temp = (int *)malloc(sizeof(int) * (argc - 1));
-	i = 0;
-	while (++i < argc)
-	{
-		chk = ft_itoa(ft_atoi(argv[i]));
-		if (!ft_strncmp(argv[i], chk, ft_strlen(argv[i])) || (ft_atoi(argv[i])
-			&& argv[i][0] == '+' && !ft_strncmp(&argv[i][1], chk,
-			ft_strlen(argv[i]) - 1)))
-			temp[i - 1] = ft_atoi(argv[i]);
-		else
-			return (free(temp), free(chk), NULL);
-		free(chk);
-//		chk = NULL;
-	}
-	if (!chk_dup(temp, argc - 1))
-		a_stack = load_stack(&a_stack, temp, argc - 1);
-	return (free(temp), free(chk), a_stack);
+	a_stack = chk_input(argc, argv, a_stack);
+	while (argc--)
+		free(argv[argc]);
+	free (argv);
+	return (a_stack);	
 }
 
 t_list	*chk_input(int argc, char **argv, t_list *a_stack)
@@ -145,5 +133,5 @@ t_list	*chk_input(int argc, char **argv, t_list *a_stack)
 	}
 	if (!chk_dup(temp, argc - 1))
 		a_stack = load_stack(&a_stack, temp, argc - 1);
-	return (free(temp), free(chk), a_stack);
+	return (free(temp), a_stack);
 }

@@ -6,13 +6,13 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:50:31 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/07 11:42:41 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/10 12:48:49 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_minimum(t_list *i_stack)
+/* int	get_minimum(t_list *i_stack)
 {
 	int	temp;
 
@@ -38,7 +38,7 @@ int	get_maximum(t_list *i_stack)
 		i_stack = i_stack->next;
 	}
 	return (temp);
-}
+} */
 /* 
 void	get_target_asc(t_list *i_stack, t_list *v_stack)
 {
