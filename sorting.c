@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sorting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 15:43:25 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/07 12:39:55 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:30:41 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 static void	sort_3_elem(t_list **a_stack)
 {
@@ -62,6 +61,8 @@ int	item_depth(t_list *stack, int target)
 	}
 	return (depth);
 }
+/* 
+
 
 void	push_max_item(t_list **a_stack, t_list **b_stack, int target)
 {
@@ -83,16 +84,21 @@ void	push_max_item(t_list **a_stack, t_list **b_stack, int target)
 			rrb(b_stack);
 	pa(a_stack, b_stack);
 }
-
+ */
 int		target_depth(t_list *a_stack, int target)
 {
-	int		depth;
+	int depth;
+	int	prev;
+	int next;
 
 	depth = 1;
 	while (a_stack && a_stack->next)
 	{
-		if (((t_item *)(a_stack->content))->target < target 
-			&& ((t_item *)(a_stack->next->content))->target > target)
+		prev = ((t_item *)(a_stack->content))->target;
+		next = ((t_item *)(a_stack->next->content))->target;
+		if ((target > prev && target < next)
+			|| (target > prev && prev > next)
+			|| (prev > next && target < next))
 			return (depth);
 		depth++;
 		a_stack = a_stack->next;
@@ -100,29 +106,95 @@ int		target_depth(t_list *a_stack, int target)
 	return (0);
 }
 
-void	push_in_place(t_list **a_stack, t_list **b_stack, int target)
+int	get_item_cost(t_list *a_stack, t_list *b_stack, int a_pos, int b_pos)
 {
-	t_list	*aux;
-	int		cost;
-	int		depth;
+	int	route_up;
+	int	route_down;
+	int	route_left;
+	int	route_right;
 
-	aux = *b_stack;
-	depth = 0;
+	route_up = a_pos;
+	if (b_pos > a_pos)
+		route_up = b_pos;
+	route_down = ft_lstsize(a_stack) - a_pos;
+	if ((ft_lstsize(b_stack) - b_pos) > route_down)
+		route_down = ft_lstsize(b_stack) - b_pos;
+	route_left = a_pos + ft_lstsize(b_stack) - b_pos;
+	route_right = ft_lstsize(a_stack) - a_pos + b_pos;
+	if (route_up < route_down && route_up < route_left && route_up < route_right)
+		return (route_up);
+	if (route_down < route_left && route_down < route_right)
+		return (route_down);
+	if (route_left < route_right)
+		return (route_left);
+	return (route_right);
+}
+
+void	get_stack_cost(t_list *a_stack, t_list *b_stack)
+{
+	int		a_pos;
+	int		b_pos;
+	t_list	*aux;
+
+	b_pos = 0;
+	aux = b_stack;
 	while (aux)
 	{
-		cost = target_depth(*a_stack, ((t_item *)(aux->content))->target) + depth;
-		if (depth <= ft_lstsize(*b_stack) && cost <= ft_lstsize(*b_stack))
-			((t_item *)(aux->content))->target = 0;
-		else if (depth > ft_lstsize(*b_stack) && cost > ft_lstsize(*b_stack))
-			((t_item *)(aux->content))->target = 0;
-		else if (depth > ft_lstsize(*b_stack) && cost > ft_lstsize(*b_stack))
-			((t_item *)(aux->content))->target = 0;
-		else (depth <= ft_lstsize(*b_stack) && cost <= ft_lstsize(*b_stack))
-			((t_item *)(aux->content))->target = 0;
-
-
-		depth++;
+		a_pos = target_depth(a_stack, ((t_item *)(aux->content))->target);
+		((t_item *)(aux->content))->cost = get_item_cost(a_stack, b_stack, a_pos, b_pos);
+		b_pos++;
 		aux = aux->next;
+	}
+}
+
+int	get_cheapest_item(t_list *a_stack, t_list *b_stack)
+{
+	int		target;
+	int		cost;
+	t_list	*aux;
+
+	get_stack_cost(a_stack, b_stack);
+	aux = b_stack;
+	target = ((t_item *)(aux->content))->target;
+	cost = ((t_item *)(aux->content))->cost;
+	while (aux)
+	{
+		if (((t_item *)(aux->content))->cost < cost)
+		{
+			cost = ((t_item *)(aux->content))->cost;
+			target = ((t_item *)(aux->content))->target;
+		}
+		aux = aux->next;
+	}
+	return (target);
+}
+
+void	push_item(t_list **a_stack, t_list **b_stack, int target)
+{
+	int	cost;
+
+	cost = get_item_cost(*a_stack, *b_stack, target_depth(*a_stack, target),
+		item_depth(*b_stack, target));			
+	if (cost == target_depth(*a_stack, target) || cost == item_depth(*b_stack, target))
+		while (target_depth(*a_stack, target) && item_depth(*b_stack, target))
+			rr(a_stack, b_stack);
+	else if (cost == ft_lstsize(*a_stack) - target_depth(*a_stack, target)
+		|| cost == ft_lstsize(*b_stack) - item_depth(*b_stack, target))
+		while (target_depth(*a_stack, target) && item_depth(*b_stack, target))
+			rrr(a_stack, b_stack);
+	while (target_depth(*a_stack, target))
+	{
+		if(target_depth(*a_stack, target) <= ft_lstsize(*a_stack) / 2)
+			ra(a_stack);
+		else
+			rra(a_stack);
+	}
+	while (item_depth(*b_stack, target))
+		if(item_depth(*b_stack, target) <= ft_lstsize(*b_stack) / 2)
+			rb(b_stack);
+		else
+			rrb(b_stack);
+	pa(a_stack, b_stack);
 }
 
 void	push_median_item(t_list **a_stack, t_list **b_stack, int median)
@@ -153,6 +225,15 @@ void	push_median_item(t_list **a_stack, t_list **b_stack, int median)
 	pb(a_stack, b_stack);
 }
 
+void	print_stack(t_list *stack)
+{
+	while (stack)
+	{
+		ft_printf("%i(%i) - ", ((t_item *)(stack->content))->target, ((t_item *)(stack->content))->cost);
+		stack = stack->next;
+	}
+}
+
 void	sort(t_list **a_stack, t_list **b_stack)
 {
 	int	stack_len;
@@ -165,18 +246,19 @@ void	sort(t_list **a_stack, t_list **b_stack)
 	else if (stack_len > 3)
 	{
 		phase = 0;
-		while (phase++ < 6)
+		while (phase++ < 2)
 		{
-			median = phase * stack_len / 6;
-			while (ft_lstsize(*b_stack) < median)// && ft_lstsize(*a_stack) > 3)
+			median = phase * stack_len / 2;
+			while (ft_lstsize(*b_stack) < median && ft_lstsize(*a_stack) > 3)
 			{
 				push_median_item(a_stack, b_stack, median);
-				if (ft_lstsize(*b_stack) % 2)
+				if (ft_lstsize(*b_stack) % 2 && phase != 1)
 					rb(b_stack);
 			}
 		}
-		while (stack_len--)
-			push_max_item(a_stack, b_stack, stack_len);
+		sort_3_elem(a_stack);
+		while (stack_len-- > 3)
+			push_item(a_stack, b_stack, get_cheapest_item(*a_stack, *b_stack));
 	}
 	final_rotation(a_stack);
 }

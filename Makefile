@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: labderra <labderra@student.42.fr>          +#+  +:+       +#+         #
+#    By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/15 09:26:13 by labderra          #+#    #+#              #
-#    Updated: 2024/06/05 20:18:54 by labderra         ###   ########.fr        #
+#    Updated: 2024/06/09 19:26:55 by labderra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC = main.c \
 	routes.c \
 	checks.c \
 	
-CC = clang -Wall -Wextra -Werror -g
+CC = clang -Wall -Wextra -Werror -gdwarf-4
 OBJ = $(SRC:.c=.o)
 
 all : $(NAME)
