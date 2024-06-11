@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 18:12:09 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/10 13:17:48 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/12 01:15:38 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ t_list	*chk_input(int argc, char **argv, t_list *a_stack)
 	i = 0;
 	while (++i < argc)
 	{
+		if (!ft_strncmp(argv[i], "", ft_strlen(argv[i])))
+			return (free(temp), NULL);
 		chk = ft_itoa(ft_atoi(argv[i]));
 		if (!ft_strncmp(argv[i], chk, ft_strlen(argv[i])) || (ft_atoi(argv[i])
 				&& argv[i][0] == '+' && !ft_strncmp(&argv[i][1], chk,
