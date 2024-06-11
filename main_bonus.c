@@ -6,16 +6,19 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:01:15 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/11 13:59:15 by labderra         ###   ########.fr       */
+/*   Updated: 2024/06/11 14:53:37 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
 #include <unistd.h>
 
-void	move_error()
+void	move_error(t_list **a_stack, t_list **b_stack, char **move)
 {
 	write(2, "Error\n", 6);
+	ft_lstclear(a_stack, &free);
+	ft_lstclear(b_stack, &free);
+	free(*move);
 	exit(EXIT_FAILURE);
 }
 
@@ -42,7 +45,7 @@ int	move_stack(t_list **a_stack, t_list **b_stack, char **move)
 	else if (ft_strncmp(*move, "rrr\n", 4) == 0)
 		rrr(a_stack, b_stack);
 	else
-		move_error();
+		move_error(a_stack, b_stack, move);
 	return (1);
 }
 
@@ -63,13 +66,20 @@ int	main(int argc, char **argv)
 	if (!a_stack)
 		return (write(2, "Error\n", 6), 0);
 	move = get_next_line(0);
-	while (move && move_stack(&a_stack, &b_stack, &move)) 
+	while (move && move_stack(&a_stack, &b_stack, &move))
+	{
+		free(move);
 		move = get_next_line(0);
+	}
+	free(move);
+ft_printf("%s", move);
 	if (chk_sorted(a_stack) && !b_stack)
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
 	ft_lstclear(&a_stack, &free);
 	ft_lstclear(&b_stack, &free);
+	free(a_stack);
+	free(b_stack);
 	return (0);
 }
