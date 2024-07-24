@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:01:15 by labderra          #+#    #+#             */
-/*   Updated: 2024/06/12 01:20:52 by labderra         ###   ########.fr       */
+/*   Updated: 2024/07/24 10:05:06 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	move_stack(t_list **a_stack, t_list **b_stack, char **move)
 		sa(*a_stack);
 	else if (ft_strncmp(*move, "sb\n", 3) == 0)
 		sb(*b_stack);
+	else if (ft_strncmp(*move, "ss\n", 3) == 0)
+		ss(*a_stack, *b_stack);
 	else if (ft_strncmp(*move, "ra\n", 3) == 0)
 		ra(a_stack);
 	else if (ft_strncmp(*move, "rb\n", 3) == 0)
